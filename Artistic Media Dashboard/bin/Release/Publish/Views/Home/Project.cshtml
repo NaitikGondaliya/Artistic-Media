@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Artistic_Media_Dashboard.Models.ProjectModel>
+@{
+    ViewBag.Title = "Project";
+}
+
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" style="margin-top:30px">
+            <h2 style="display:inline">Project List</h2>
+            <button id="addnewproj" style="display:inline;margin-bottom:5px;float:right" class="btn btn-primary">Add New</button>
+        </div>
+        <div class="col-md-12 table-responsive">
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th>Project Id</th>
+                    <th>Name</th>
+                    <th>Number</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.ProjectId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ProjectName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ProjectNumber)</td>
+                        <td>@Html.DisplayFor(modelItem => item.strProjectDate)</td>
+                        <td>
+                            @Html.ActionLink("Delete", "DeleteProject", new { id = item.ProjectId},
+                       htmlAttributes: new { onclick = "return confirm('Are you sure you wish to delete this project?');", @class = "btn btn-danger" })
+                    </td>
+                </tr>
+                @*<tr>
+                        <td>Centro comercial Moctezuma</td>
+                        <td>Francisco Chang</td>
+                        <td>Mexico</td>
+                        <td>@Html.ActionLink("Delete", "Delete", new { id = 1 }, htmlAttributes: new { @class = "btn btn-danger" })</td>
+                    </tr>*@
+            }
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+            $('#addnewproj').click(function (event) {
+                debugger;
+                var url = window.location.href
+                url = '/home/AddProject';
+                window.location.href = url;
+                //event.preventDefault();
+                //var project = {
+                //    ProjectNumber: $('#ProjectNumber').val(),
+                //    ProjectName: $('#ProjectName').val(),
+                //    ProjectDate: $('#ProjectDate').val()
+                //};
+                //$.ajax({
+                //    type: "GET",
+                //    url: "/Home/Project",
+                //    contentType: 'application/json; charset=utf-8'
+                //});
+            });
+        });
+    });
+</script>
