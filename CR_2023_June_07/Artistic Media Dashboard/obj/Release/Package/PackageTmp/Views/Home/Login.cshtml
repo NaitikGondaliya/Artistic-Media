@@ -1,0 +1,73 @@
+﻿@model Artistic_Media_Dashboard.Models.LoginModel
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<div class="container" style="margin:50px">
+    <div class="row">
+        <form method="post" autocomplete="off" enctype="multipart/form-data" id="createProject">
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Username, "Username", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Username, new { @id = "Username" })
+                        @Html.ValidationMessageFor(x => x.Username)
+                        <input type="hidden" value="" id="hdnFlag" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, "Password", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Password, new { type = "password", @id = "Password" })
+                        @Html.ValidationMessageFor(x => x.Password)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-10">
+                        <input type="submit" class="btn btn-success" id="btnSubmit" value="Login">
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".attachmentdiv").hide();
+        $(function () {
+            $('#btnSubmit').click(function (event) {
+                debugger;
+                event.preventDefault();
+                var authmodel = {
+                    Username: $('#Username').val(),
+                    Password: $('#Password').val()
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/Authenticate",
+                    data: JSON.stringify(authmodel),
+                    dataType: "json",
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        if (data != 0) {
+                            var url = window.location.href
+                            url = '/home/Dashboard';
+                            window.location.href = url;
+                        }
+                        else {
+                            alert("Invalid Credential!!");
+                        }
+                        //var url = window.location.href
+                        //url = '/home/Project';
+                        //window.location.href = url;
+                    },
+                    error: function () {
+                        alert("Error occured!!")
+                    }
+                });
+            });
+        });
+    });
+</script>

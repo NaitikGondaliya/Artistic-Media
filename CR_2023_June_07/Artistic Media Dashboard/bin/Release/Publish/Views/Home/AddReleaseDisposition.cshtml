@@ -1,0 +1,138 @@
+﻿@model Artistic_Media_Dashboard.Models.ReleaseDispositionModel
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<div class="container" style="margin:50px">
+    <div class="row">
+        <form method="post" autocomplete="off" enctype="multipart/form-data" id="createProject">
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DispoDate, "Date", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.DispoDate, new { @id = "DispoDate", type = "date" })
+                        @Html.ValidationMessageFor(x => x.DispoDate)
+                    </div>
+                </div>
+                <div class="form-group attachmentdiv">
+                    @Html.Label("File", new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBox("file", "", new { type = "file", accept = ".pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel", id = "Attachment1", style = "display: inline-block;" })
+                        @Html.TextBox("file", "", new { @class = "txtNumeric", type = "text", id = "txtAttachment1", style = "display: inline-block;" })
+
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-10">
+                        <input type="button" onclick="UploadFile()" class="btn btn-success" id="btnSubmit" value="Save">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+            $('#btnSubmit').click(function (event) {
+                //debugger;
+                //event.preventDefault();
+                //var project = {
+                //    ProjectNumber: $('#ProjectNumber').val(),
+                //    ProjectName: $('#ProjectName').val(),
+                //    ProjectDate: $('#ProjectDate').val()
+                //};
+                //$.ajax({
+                //    type: "POST",
+                //    url: "/Home/SaveProject",
+                //    data: JSON.stringify(project),
+                //    dataType: "json",
+                //    contentType: 'application/json; charset=utf-8',
+                //    success: function (data) {
+                //        if (data != 0) {
+                //            $('#hdnFlag').val(data);
+                //            $('#ProjectNumber').prop('disabled', true);
+                //            $('#ProjectName').prop('disabled', true);
+                //            $('#ProjectDate').prop('disabled', true);
+                //            $(".attachmentdiv").show();
+                //            alert("Project Saved Successfully!!")
+                //        }
+                //        else {
+                //            alert("All Fields Are Mandatory!!");
+                //        }
+                //        //var url = window.location.href
+                //        //url = '/home/Project';
+                //        //window.location.href = url;
+                //    },
+                //    error: function () {
+                //        alert("Error occured!!")
+                //    }
+                //});
+            });
+
+            $(function () {
+                $('.txtNumeric').keypress(function (e) {
+                    debugger;
+                    var regex = new RegExp(/^[a-z\d\_]+$/i);
+                    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+                    if (regex.test(str)) {
+                        return true;
+                    }
+                    e.preventDefault();
+                    return false;
+                });
+            });
+
+
+
+            $('#btnlist').click(function (event) {
+                debugger;
+                var url = window.location.href
+                url = '/home/ReleaseDisposition';
+                window.location.href = url;
+                //event.preventDefault();
+                //var project = {
+                //    ProjectNumber: $('#ProjectNumber').val(),
+                //    ProjectName: $('#ProjectName').val(),
+                //    ProjectDate: $('#ProjectDate').val()
+                //};
+                //$.ajax({
+                //    type: "GET",
+                //    url: "/Home/Project",
+                //    contentType: 'application/json; charset=utf-8'
+                //});
+            });
+        });
+    });
+
+    function UploadFile() {
+        debugger;
+        var data = new FormData();
+        data.append("dispodate", $('#DispoDate').val());
+        data.append("filename", $('#txtAttachment1').val());
+        //data.append("projectid", 1)
+        //data.append("filename", "test")
+        $.each($('#Attachment1' )[0].files, function (i, file) {
+            data.append('file-' + i, file);
+        });
+
+        $.ajax({
+            url: "/Home/UploadReleaseDisposition",
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            type: 'POST', // For jQuery < 1.9
+            success: function (data) {
+                if (data == "File Uploaded Successfully!!") {
+                    var url = window.location.href
+                url = '/home/ReleaseDisposition';
+                window.location.href = url;
+                }
+               // alert(data);
+            }
+        });
+    }
+</script>
