@@ -1,0 +1,76 @@
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\Artistic Media Dashboard.dll.config
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\Artistic Media Dashboard.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\Artistic Media Dashboard.pdb
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\csc.exe
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\csc.exe.config
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\csc.rsp
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\csi.exe
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\csi.exe.config
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\csi.rsp
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\Microsoft.Managed.Core.targets
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.AppContext.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.Collections.Immutable.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.Console.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.IO.Compression.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.IO.FileSystem.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.IO.Pipes.AccessControl.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.IO.Pipes.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.Reflection.Metadata.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.Security.AccessControl.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.Security.Claims.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.Security.Cryptography.Encoding.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.Security.Cryptography.Primitives.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.Security.Principal.Windows.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.ValueTuple.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.Xml.ReaderWriter.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.Xml.XmlDocument.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.Xml.XPath.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\vbc.exe
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\vbc.exe.config
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\vbc.rsp
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\VBCSCompiler.exe
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\roslyn\VBCSCompiler.exe.config
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\Antlr3.Runtime.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\Microsoft.Web.Infrastructure.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\Newtonsoft.Json.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\System.Web.Helpers.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\System.Web.Mvc.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\System.Web.Optimization.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\System.Web.Razor.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\System.Web.WebPages.Deployment.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\System.Web.WebPages.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\System.Web.WebPages.Razor.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\WebGrease.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\System.Web.Helpers.xml
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\System.Web.Mvc.xml
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\System.Web.Optimization.xml
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\System.Web.Razor.xml
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\System.Web.WebPages.xml
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\System.Web.WebPages.Deployment.xml
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\System.Web.WebPages.Razor.xml
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\Newtonsoft.Json.xml
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\Antlr3.Runtime.pdb
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\obj\Debug\Artistic Media Dashboard.csproj.CopyComplete
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\obj\Debug\Artistic Media Dashboard.dll
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\obj\Debug\Artistic Media Dashboard.pdb
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\obj\Debug\Artistic Media Dashboard.csproj.AssemblyReference.cache
+D:\Project\Artistic Media\ArtisticMediaDashboard\Artistic Media Dashboard\obj\Debug\Artistic Media Dashboard.csproj.CoreCompileInputs.cache

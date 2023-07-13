@@ -1,0 +1,257 @@
+﻿@model Artistic_Media_Dashboard.Models.ProjectModel
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<div class="container" style="margin:50px">
+    <div class="row">
+        <form method="post" autocomplete="off" enctype="multipart/form-data" id="createProject">
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProjectName, "Project Name", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.ProjectName, new { @id = "ProjectName" })
+                        @Html.ValidationMessageFor(x => x.ProjectName)
+                        <input type="hidden" value="" id="hdnFlag" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProjectNumber, "Project Number", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.ProjectNumber, new { type = "number", @id = "ProjectNumber" })
+                        @Html.ValidationMessageFor(x => x.ProjectNumber)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProjectDate, "Project Date", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.ProjectDate, new { @id = "ProjectDate", type = "datetime-local" })
+                        @Html.ValidationMessageFor(x => x.ProjectDate)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-10">
+                        <input type="submit" class="btn btn-success" id="btnSubmit" value="Submit">
+                    </div>
+                </div>
+                <div class="form-group attachmentdiv">
+                    @Html.Label("Project", new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBox("file", "", new { type = "file",  id = "Attachment1", style = "display: inline-block;" })
+                        @Html.TextBox("file", "", new { @class = "txtNumeric", type = "text", id = "txtAttachment1", style = "display: inline-block;" })
+
+                    </div>
+                    <div class="col-md-1">
+                        <input type="button" onclick="UploadFile(1,1);" class="btn btn-info" id="upload1" value="Upload" />
+                    </div>
+                </div>
+                <div class="form-group attachmentdiv">
+                    @Html.Label("Attachment 1", new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBox("file", "", new { type = "file", id = "Attachment2", style = "display: inline-block;" })
+                        @Html.TextBox("file", "", new { @class = "txtNumeric",type = "text", id = "txtAttachment2", style = "display: inline-block;" })
+                    </div>
+                    <div class="col-md-1">
+                        <input type="button" onclick="UploadFile(2,2);" class="btn btn-info" id="upload2" value="Upload" />
+                    </div>
+                </div>
+                <div class="form-group attachmentdiv">
+                    @Html.Label("Attachment 2", new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBox("file", "", new { type = "file", id = "Attachment3", style = "display: inline-block;" })
+                        @Html.TextBox("file", "", new { @class = "txtNumeric",type = "text", id = "txtAttachment3", style = "display: inline-block;" })
+                    </div>
+                    <div class="col-md-1">
+                        <input type="button" onclick="UploadFile(3,2);" class="btn btn-info" id="upload3" value="Upload" />
+                    </div>
+                </div>
+                <div class="form-group attachmentdiv">
+                    @Html.Label("Attachment 3", new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBox("file", "", new { type = "file", id = "Attachment4", style = "display: inline-block;" })
+                        @Html.TextBox("file", "", new {@class = "txtNumeric", type = "text", id = "txtAttachment4", style = "display: inline-block;" })
+                    </div>
+                    <div class="col-md-1">
+                        <input type="button" onclick="UploadFile(4,2);" class="btn btn-info" id="upload4" value="Upload" />
+                    </div>
+                </div>
+                <div class="form-group attachmentdiv">
+                    @Html.Label("Attachment 4", new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBox("file", "", new { type = "file", id = "Attachment5", style = "display: inline-block;" })
+                        @Html.TextBox("file", "", new { @class = "txtNumeric",type = "text", id = "txtAttachment5", style = "display: inline-block;" })
+                    </div>
+                    <div class="col-md-1">
+                        <input type="button" onclick="UploadFile(5,2);" class="btn btn-info" id="upload5" value="Upload" />
+                    </div>
+                </div>
+                <div class="form-group attachmentdiv">
+                    @Html.Label("Attachment 5", new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBox("file", "", new { type = "file", id = "Attachment6", style = "display: inline-block;" })
+                        @Html.TextBox("file", "", new { @class = "txtNumeric",type = "text", id = "txtAttachment6", style = "display: inline-block;" })
+                    </div>
+                    <div class="col-md-1">
+                        <input type="button" onclick="UploadFile(6,2);" class="btn btn-info" id="upload6" value="Upload" />
+                    </div>
+                </div>
+                <div class="form-group attachmentdiv">
+                    @Html.Label("Annex 1", new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBox("file", "", new { type = "file", id = "Attachment7", style = "display: inline-block;" })
+                        @Html.TextBox("file", "", new { @class = "txtNumeric",type = "text", id = "txtAttachment7", style = "display: inline-block;" })
+                    </div>
+                    <div class="col-md-1">
+                        <input type="button" onclick="UploadFile(7,3);" class="btn btn-info" id="upload7" value="Upload" />
+                    </div>
+                </div>
+                <div class="form-group attachmentdiv">
+                    @Html.Label("Annex 2", new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBox("file", "", new { type = "file", id = "Attachment8", style = "display: inline-block;" })
+                        @Html.TextBox("file", "", new { @class = "txtNumeric",type = "text", id = "txtAttachment8", style = "display: inline-block;" })
+                    </div>
+                    <div class="col-md-1">
+                        <input type="button" onclick="UploadFile(8,3);" class="btn btn-info" id="upload8" value="Upload" />
+                    </div>
+                </div>
+                <div class="form-group attachmentdiv">
+                    @Html.Label("Annex 3", new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBox("file", "", new { type = "file", id = "Attachment9", style = "display: inline-block;" })
+                        @Html.TextBox("file", "", new { @class = "txtNumeric",type = "text", id = "txtAttachment9", style = "display: inline-block;" })
+                    </div>
+                    <div class="col-md-1">
+                        <input type="button" onclick="UploadFile(9,3);" class="btn btn-info" id="upload9" value="Upload" />
+                    </div>
+                </div>
+                <div class="form-group attachmentdiv">
+                    @Html.Label("Annex 4", new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBox("file", "", new { type = "file", id = "Attachment10", style = "display: inline-block;" })
+                        @Html.TextBox("file", "", new {@class = "txtNumeric", type = "text", id = "txtAttachment10", style = "display: inline-block;" })
+                    </div>
+                    <div class="col-md-1">
+                        <input type="button" onclick="UploadFile(10,3);" class="btn btn-info" id="upload10" value="Upload" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-10">
+                        <input type="button" class="btn btn-danger" id="btnlist" value="Go To List">
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".attachmentdiv").hide();
+        $(function () {
+            $('#btnSubmit').click(function (event) {
+                debugger;
+                event.preventDefault();
+                var project = {
+                    ProjectNumber: $('#ProjectNumber').val(),
+                    ProjectName: $('#ProjectName').val(),
+                    ProjectDate: $('#ProjectDate').val()
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/SaveProject",
+                    data: JSON.stringify(project),
+                    dataType: "json",
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        if (data != 0) {
+                            $('#hdnFlag').val(data);
+                            $('#ProjectNumber').prop('disabled', true);
+                            $('#ProjectName').prop('disabled', true);
+                            $('#ProjectDate').prop('disabled', true);
+                            $(".attachmentdiv").show();
+                            alert("Project Saved Successfully!!")
+                        }
+                        else {
+                            alert("All Fields Are Mandatory!!");
+                        }
+                        //var url = window.location.href
+                        //url = '/home/Project';
+                        //window.location.href = url;
+                    },
+                    error: function () {
+                        alert("Error occured!!")
+                    }
+                });
+            });
+
+            $(function () {
+                $('.txtNumeric').keypress(function (e) {
+                    //debugger;
+                    //var regex = new RegExp(/^[a-z\d\_]+$/i);
+                    //var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+                    //if (regex.test(str)) {
+                    //    return true;
+                    //}
+                    //e.preventDefault();
+                    //return false;
+                    return true;
+                });
+            });
+
+
+
+            $('#btnlist').click(function (event) {
+                debugger;
+                var url = window.location.href
+                url = '/home/Project';
+                window.location.href = url;
+                //event.preventDefault();
+                //var project = {
+                //    ProjectNumber: $('#ProjectNumber').val(),
+                //    ProjectName: $('#ProjectName').val(),
+                //    ProjectDate: $('#ProjectDate').val()
+                //};
+                //$.ajax({
+                //    type: "GET",
+                //    url: "/Home/Project",
+                //    contentType: 'application/json; charset=utf-8'
+                //});
+            });
+        });
+    });
+
+    function UploadFile(attachmentnumber,attachmentType) {
+        debugger;
+        var data = new FormData();
+        data.append("projectid", $('#hdnFlag').val());
+        data.append("filename", $('#txtAttachment' + attachmentnumber).val());
+        data.append("attachmentType", attachmentType);
+        //data.append("projectid", 1)
+        //data.append("filename", "test")
+        $.each($('#Attachment' + attachmentnumber)[0].files, function (i, file) {
+            data.append('file-' + i, file);
+        });
+
+        $.ajax({
+            url: "/Home/UploadFile",
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            type: 'POST', // For jQuery < 1.9
+            success: function (data) {
+                if (data == "File Uploaded Successfully!!") {
+                    $('#Attachment' + attachmentnumber).prop('disabled', true);
+                    $('#txtAttachment' + attachmentnumber).prop('disabled', true);
+                    $('#upload' + attachmentnumber).prop('disabled', true);
+                }
+                alert(data);
+            }
+        });
+    }
+</script>

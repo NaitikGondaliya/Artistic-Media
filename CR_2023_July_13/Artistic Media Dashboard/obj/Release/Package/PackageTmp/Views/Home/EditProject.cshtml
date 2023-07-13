@@ -1,0 +1,511 @@
+﻿@model Artistic_Media_Dashboard.Models.ProjectModel
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<div class="container" style="margin:50px">
+    <div class="row">
+        <form method="post" autocomplete="off" enctype="multipart/form-data" id="createProject">
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProjectName, "Project Name", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.ProjectName, new { @id = "ProjectName" })
+                        @Html.ValidationMessageFor(x => x.ProjectName)
+                        @Html.TextBoxFor(model => model.ProjectId, new { @id = "ProjectId", style = "display:none" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProjectNumber, "Project Number", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.ProjectNumber, new { type = "number", @id = "ProjectNumber" })
+                        @Html.ValidationMessageFor(x => x.ProjectNumber)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProjectDate, "Project Date", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.ProjectDate, new { @id = "ProjectDate", type = "datetime-local",value="" })
+                        @Html.ValidationMessageFor(x => x.ProjectDate)
+                        <span id="spdateformat" style="display:none">@Model.ProjectDate.ToString("yyyy-MM-ddTHH:mm")</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-10">
+                        <input type="submit" class="btn btn-success" id="btnSubmit" value="Submit">
+                    </div>
+                </div>
+                <div class="form-group attachmentdiv diveditAttachment1">
+                    @Html.Label("Project", new { @class = "control-label col-md-2" })
+                    <div class="Attachment1 col-md-5">
+                        @Html.TextBox("file", "", new { type = "file",  id = "Attachmente1", style = "display: inline-block;" })
+                        @Html.TextBox("file", "", new { @class = "txtNumeric", type = "text", id = "txtAttachmente1", style = "display: inline-block;" })
+                    </div>
+                    <div class="col-md-5">
+                        <input type="button" onclick="UploadFile(1,'e',1,@(Model.lstAttachmentModel.Where(x=>x.AttachmentType==1).Count()==1?Model.lstAttachmentModel.Where(x=>x.AttachmentType==1).ToList()[0].ProjectAttachmentMappingId:0));" class="btn btn-info" id="eupload1" value="Upload" />
+                        <input type="button" onclick="CancelFile(1);" class="btn btn-danger" id="ebtncancel1" value="Cancel" />
+                    </div>
+                </div>
+
+                <div class="form-group attachmentdiv divdisplayAttachment1">
+                    @Html.Label("Project", new { @class = "control-label col-md-2" })
+                    @if (Model.lstAttachmentModel.Where(x => x.AttachmentType == 1).Count() == 1)
+                    {
+                        <div class="DwnldAttachment1 col-md-5">
+                            <a style="display: inline-block;" href=@Model.lstAttachmentModel.Where(x=>x.AttachmentType==1).ToList()[0].AttachmentURL target="_blank">@Model.lstAttachmentModel.Where(x => x.AttachmentType == 1).ToList()[0].filename</a>&nbsp;
+                            <input type="button" onclick="EditFile(1);" class="btn btn-info" id="edit1" value="Edit" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="Attachment1 col-md-5">
+                            @Html.TextBox("file", "", new { type = "file",  id = "Attachmenta1", style = "display: inline-block;" })
+                            @Html.TextBox("file", "", new { @class = "txtNumeric", type = "text", id = "txtAttachmenta1", style = "display: inline-block;" })
+                        </div>
+                        <div class="col-md-5">
+                            <input type="button" onclick="UploadFile(1,'a',1,0);" class="btn btn-info" id="aupload1" value="Upload" />
+                            @*<input type="button" onclick="CancelFile(1);" class="btn btn-danger" id="abtncancel1" value="Cancel" />*@
+                        </div>
+                    }
+                </div>
+
+                <div class="form-group attachmentdiv diveditAttachment2">
+                    @Html.Label("Attachment 1", new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBox("file", "", new { type = "file",  id = "Attachmente2", style = "display: inline-block;" })
+                        @Html.TextBox("file", "", new { @class = "txtNumeric", type = "text", id = "txtAttachmente2", style = "display: inline-block;" })
+                    </div>
+                    <div class="col-md-5">
+                        <input type="button" onclick="UploadFile(2,'e',2,@(Model.lstAttachmentModel.Where(x=>x.AttachmentType==2).Count()>0?Model.lstAttachmentModel.Where(x=>x.AttachmentType==2).ToList()[0].ProjectAttachmentMappingId:0));" class="btn btn-info" id="eupload2" value="Upload" />
+                        <input type="button" onclick="CancelFile(2);" class="btn btn-danger" id="ebtncancel2" value="Cancel" />
+                    </div>
+                </div>
+
+                <div class="form-group attachmentdiv divdisplayAttachment2">
+                    @Html.Label("Attachment 1", new { @class = "control-label col-md-2" })
+                    @if (Model.lstAttachmentModel.Where(x => x.AttachmentType == 2).Count() > 0)
+                    {
+                        <div class="DwnldAttachment1 col-md-5">
+                            <a style="display: inline-block;" href=@Model.lstAttachmentModel.Where(x=>x.AttachmentType==2).ToList()[0].AttachmentURL target="_blank">@Model.lstAttachmentModel.Where(x => x.AttachmentType == 2).ToList()[0].filename</a>&nbsp;
+                            <input type="button" onclick="EditFile(2);" class="btn btn-info" id="edit1" value="Edit" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-5">
+                            @Html.TextBox("file", "", new { type = "file",  id = "Attachmenta2", style = "display: inline-block;" })
+                            @Html.TextBox("file", "", new { @class = "txtNumeric", type = "text", id = "txtAttachmenta2", style = "display: inline-block;" })
+                        </div>
+                        <div class="col-md-5">
+                            <input type="button" onclick="UploadFile(2,'a',2,0);" class="btn btn-info" id="aupload2" value="Upload" />
+                            @*<input type="button" onclick="CancelFile(2);" class="btn btn-danger" id="abtncancel2" value="Cancel" />*@
+                        </div>
+                    }
+                </div>
+
+
+                <div class="form-group attachmentdiv diveditAttachment3">
+                    @Html.Label("Attachment 2", new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBox("file", "", new { type = "file",  id = "Attachmente3", style = "display: inline-block;" })
+                        @Html.TextBox("file", "", new { @class = "txtNumeric", type = "text", id = "txtAttachmente3", style = "display: inline-block;" })
+                    </div>
+                    <div class="col-md-5">
+                        <input type="button" onclick="UploadFile(3,'e',2,@(Model.lstAttachmentModel.Where(x=>x.AttachmentType==2).Count()>1?Model.lstAttachmentModel.Where(x=>x.AttachmentType==2).ToList()[1].ProjectAttachmentMappingId:0));" class="btn btn-info" id="upload3" value="Upload" />
+                        <input type="button" onclick="CancelFile(3);" class="btn btn-danger" id="ebtncancel3" value="Cancel" />
+                    </div>
+                </div>
+
+                <div class="form-group attachmentdiv divdisplayAttachment3">
+                    @Html.Label("Attachment 2", new { @class = "control-label col-md-2" })
+                    @if (Model.lstAttachmentModel.Where(x => x.AttachmentType == 2).Count() > 1)
+                    {
+                        <div class="DwnldAttachment4 col-md-5">
+                            <a style="display: inline-block;" href=@Model.lstAttachmentModel.Where(x=>x.AttachmentType==2).ToList()[1].AttachmentURL target="_blank">@Model.lstAttachmentModel.Where(x => x.AttachmentType == 2).ToList()[1].filename</a>&nbsp;
+                            <input type="button" onclick="EditFile(3);" class="btn btn-info" id="edit1" value="Edit" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-5">
+                            @Html.TextBox("file", "", new { type = "file",  id = "Attachmenta3", style = "display: inline-block;" })
+                            @Html.TextBox("file", "", new { @class = "txtNumeric", type = "text", id = "txtAttachmenta3", style = "display: inline-block;" })
+                        </div>
+                        <div class="col-md-5">
+                            <input type="button" onclick="UploadFile(3,'a',2,0);" class="btn btn-info" id="upload3" value="Upload" />
+                            @*<input type="button" onclick="CancelFile(3);" class="btn btn-danger" id="abtncancel3" value="Cancel" />*@
+                        </div>
+                    }
+                </div>
+
+                <div class="form-group attachmentdiv diveditAttachment4">
+                    @Html.Label("Attachment 3", new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBox("file", "", new { type = "file",  id = "Attachmente4", style = "display: inline-block;" })
+                        @Html.TextBox("file", "", new { @class = "txtNumeric", type = "text", id = "txtAttachmente4", style = "display: inline-block;" })
+                    </div>
+                    <div class="col-md-5">
+                        <input type="button" onclick="UploadFile(4,'e',2,@(Model.lstAttachmentModel.Where(x=>x.AttachmentType==2).Count()>2?Model.lstAttachmentModel.Where(x=>x.AttachmentType==2).ToList()[2].ProjectAttachmentMappingId:0));" class="btn btn-info" id="eupload4" value="Upload" />
+                        <input type="button" onclick="CancelFile(4);" class="btn btn-danger" id="ebtncancel4" value="Cancel" />
+                    </div>
+                </div>
+
+                <div class="form-group attachmentdiv divdisplayAttachment4">
+                    @Html.Label("Attachment 3", new { @class = "control-label col-md-2" })
+                    @if (Model.lstAttachmentModel.Where(x => x.AttachmentType == 2).Count() > 2)
+                    {
+                        <div class="DwnldAttachment4 col-md-5">
+                            <a style="display: inline-block;" href=@Model.lstAttachmentModel.Where(x=>x.AttachmentType==2).ToList()[2].AttachmentURL target="_blank">@Model.lstAttachmentModel.Where(x => x.AttachmentType == 2).ToList()[2].filename</a>&nbsp;
+                            <input type="button" onclick="EditFile(4);" class="btn btn-info" id="edit4" value="Edit" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-5">
+                            @Html.TextBox("file", "", new { type = "file",  id = "Attachmenta4", style = "display: inline-block;" })
+                            @Html.TextBox("file", "", new { @class = "txtNumeric", type = "text", id = "txtAttachmenta4", style = "display: inline-block;" })
+                        </div>
+                        <div class="col-md-5">
+                            <input type="button" onclick="UploadFile(4,'a',2,0);" class="btn btn-info" id="aupload4" value="Upload" />
+                            @*<input type="button" onclick="CancelFile(4);" class="btn btn-danger" id="abtncancel4" value="Cancel" />*@
+                        </div>
+                    }
+                </div>
+
+                <div class="form-group attachmentdiv diveditAttachment5">
+                    @Html.Label("Attachment 4", new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBox("file", "", new { type = "file",  id = "Attachmente5", style = "display: inline-block;" })
+                        @Html.TextBox("file", "", new { @class = "txtNumeric", type = "text", id = "txtAttachmente5", style = "display: inline-block;" })
+                    </div>
+                    <div class="col-md-5">
+                        <input type="button" onclick="UploadFile(5,'e',2,@(Model.lstAttachmentModel.Where(x=>x.AttachmentType==2).Count()>3?Model.lstAttachmentModel.Where(x=>x.AttachmentType==2).ToList()[3].ProjectAttachmentMappingId:0));" class="btn btn-info" id="eupload5" value="Upload" />
+                        <input type="button" onclick="CancelFile(5);" class="btn btn-danger" id="ebtncancel5" value="Cancel" />
+                    </div>
+                </div>
+
+                <div class="form-group attachmentdiv divdisplayAttachment5">
+                    @Html.Label("Attachment 4", new { @class = "control-label col-md-2" })
+                    @if (Model.lstAttachmentModel.Where(x => x.AttachmentType == 2).Count() > 3)
+                    {
+                        <div class="DwnldAttachment5 col-md-5">
+                            <a style="display: inline-block;" href=@Model.lstAttachmentModel.Where(x=>x.AttachmentType==2).ToList()[3].AttachmentURL target="_blank">@Model.lstAttachmentModel.Where(x => x.AttachmentType == 2).ToList()[3].filename</a>&nbsp;
+                            <input type="button" onclick="EditFile(5);" class="btn btn-info" id="edit5" value="Edit" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-5">
+                            @Html.TextBox("file", "", new { type = "file",  id = "Attachmenta5", style = "display: inline-block;" })
+                            @Html.TextBox("file", "", new { @class = "txtNumeric", type = "text", id = "txtAttachmenta5", style = "display: inline-block;" })
+                        </div>
+                        <div class="col-md-5">
+                            <input type="button" onclick="UploadFile(5,'a',2,0);" class="btn btn-info" id="aupload5" value="Upload" />
+                            @*<input type="button" onclick="CancelFile(5);" class="btn btn-danger" id="abtncancel5" value="Cancel" />*@
+                        </div>
+                    }
+                </div>
+                <div class="form-group attachmentdiv diveditAttachment6">
+                    @Html.Label("Attachment 5", new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBox("file", "", new { type = "file",  id = "Attachmente6", style = "display: inline-block;" })
+                        @Html.TextBox("file", "", new { @class = "txtNumeric", type = "text", id = "txtAttachmente6", style = "display: inline-block;" })
+                    </div>
+                    <div class="col-md-5">
+                        <input type="button" onclick="UploadFile(6,'e',2,@(Model.lstAttachmentModel.Where(x=>x.AttachmentType==2).Count()>4?Model.lstAttachmentModel.Where(x=>x.AttachmentType==2).ToList()[4].ProjectAttachmentMappingId:0));" class="btn btn-info" id="eupload6" value="Upload" />
+                        <input type="button" onclick="CancelFile(6);" class="btn btn-danger" id="ebtncancel6" value="Cancel" />
+                    </div>
+                </div>
+                <div class="form-group attachmentdiv divdisplayAttachment6">
+                    @Html.Label("Attachment 5", new { @class = "control-label col-md-2" })
+                    @if (Model.lstAttachmentModel.Where(x => x.AttachmentType == 2).Count() > 4)
+                    {
+                        <div class="DwnldAttachment6 col-md-5">
+                            <a style="display: inline-block;" href=@Model.lstAttachmentModel.Where(x=>x.AttachmentType==2).ToList()[4].AttachmentURL target="_blank">@Model.lstAttachmentModel.Where(x => x.AttachmentType == 2).ToList()[4].filename</a>&nbsp;
+                            <input type="button" onclick="EditFile(6);" class="btn btn-info" id="edit6" value="Edit" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-5">
+                            @Html.TextBox("file", "", new { type = "file",  id = "Attachmenta6", style = "display: inline-block;" })
+                            @Html.TextBox("file", "", new { @class = "txtNumeric", type = "text", id = "txtAttachmenta6", style = "display: inline-block;" })
+                        </div>
+                        <div class="col-md-5">
+                            <input type="button" onclick="UploadFile(6,'a',2,0);" class="btn btn-info" id="aupload6" value="Upload" />
+                            @*<input type="button" onclick="CancelFile(6);" class="btn btn-danger" id="abtncancel6" value="Cancel" />*@
+                        </div>
+                    }
+                </div>
+
+                <div class="form-group attachmentdiv diveditAttachment7">
+                    @Html.Label("Annex 1", new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBox("file", "", new { type = "file",  id = "Attachmente7", style = "display: inline-block;" })
+                        @Html.TextBox("file", "", new { @class = "txtNumeric", type = "text", id = "txtAttachmente7", style = "display: inline-block;" })
+                    </div>
+                    <div class="col-md-5">
+                        <input type="button" onclick="UploadFile(7,'e',3,@(Model.lstAttachmentModel.Where(x=>x.AttachmentType==3).Count()>0?Model.lstAttachmentModel.Where(x=>x.AttachmentType==3).ToList()[0].ProjectAttachmentMappingId:0));" class="btn btn-info" id="eupload7" value="Upload" />
+                        <input type="button" onclick="CancelFile(7);" class="btn btn-danger" id="ebtncancel7" value="Cancel" />
+                    </div>
+                </div>
+
+                <div class="form-group attachmentdiv divdisplayAttachment7">
+                    @Html.Label("Annex 1", new { @class = "control-label col-md-2" })
+                    @if (Model.lstAttachmentModel.Where(x => x.AttachmentType == 3).Count() > 0)
+                    {
+                        <div class="DwnldAttachment7 col-md-5">
+                            <a style="display: inline-block;" href=@Model.lstAttachmentModel.Where(x=>x.AttachmentType==3).ToList()[0].AttachmentURL target="_blank">@Model.lstAttachmentModel.Where(x => x.AttachmentType == 3).ToList()[0].filename</a>&nbsp;
+                            <input type="button" onclick="EditFile(7);" class="btn btn-info" id="edit7" value="Edit" />
+                        </div>
+                    }
+                    else
+                    { <div class="col-md-5">
+                            @Html.TextBox("file", "", new { type = "file",  id = "Attachmenta7", style = "display: inline-block;" })
+                            @Html.TextBox("file", "", new { @class = "txtNumeric", type = "text", id = "txtAttachmenta7", style = "display: inline-block;" })
+                        </div>
+                        <div class="col-md-5">
+                            <input type="button" onclick="UploadFile(7,'a',3,0);" class="btn btn-info" id="aupload7" value="Upload" />
+                            @*<input type="button" onclick="CancelFile(7);" class="btn btn-danger" id="abtncancel7" value="Cancel" />*@
+                        </div>}
+                </div>
+
+                 <div class="form-group attachmentdiv diveditAttachment8">
+                    @Html.Label("Annex 2", new { @class = "control-label col-md-2" })
+                    <div class="col-md-5">
+                        @Html.TextBox("file", "", new { type = "file",  id = "Attachmente8", style = "display: inline-block;" })
+                        @Html.TextBox("file", "", new { @class = "txtNumeric", type = "text", id = "txtAttachmente8", style = "display: inline-block;" })
+                    </div>
+                    <div class="col-md-5">
+                        <input type="button" onclick="UploadFile(8,'e',3,@(Model.lstAttachmentModel.Where(x=>x.AttachmentType==3).Count()>1?Model.lstAttachmentModel.Where(x=>x.AttachmentType==3).ToList()[1].ProjectAttachmentMappingId:0));" class="btn btn-info" id="eupload8" value="Upload" />
+                        <input type="button" onclick="CancelFile(8);" class="btn btn-danger" id="ebtncancel8" value="Cancel" />
+                    </div>
+                </div>
+
+                 <div class="form-group attachmentdiv divdisplayAttachment8">
+                     @Html.Label("Annex 2", new { @class = "control-label col-md-2" })
+                     @if (Model.lstAttachmentModel.Where(x => x.AttachmentType == 3).Count() > 1)
+                     {
+                         <div class="DwnldAttachment8 col-md-5">
+                             <a style="display: inline-block;" href=@Model.lstAttachmentModel.Where(x=>x.AttachmentType==3).ToList()[1].AttachmentURL target="_blank">@Model.lstAttachmentModel.Where(x => x.AttachmentType == 3).ToList()[1].filename</a>&nbsp;
+                             <input type="button" onclick="EditFile(8);" class="btn btn-info" id="edit8" value="Edit" />
+                         </div>
+                     }
+                     else
+                     { <div class="col-md-5">
+                             @Html.TextBox("file", "", new { type = "file",  id = "Attachmenta8", style = "display: inline-block;" })
+                             @Html.TextBox("file", "", new { @class = "txtNumeric", type = "text", id = "txtAttachmenta8", style = "display: inline-block;" })
+                         </div>
+                         <div class="col-md-5">
+                             <input type="button" onclick="UploadFile(8,'a',3,0);" class="btn btn-info" id="aupload8" value="Upload" />
+                             @*<input type="button" onclick="CancelFile(8);" class="btn btn-danger" id="abtncancel8" value="Cancel" />*@
+                         </div>}
+                 </div>
+
+        <div class="form-group attachmentdiv diveditAttachment9">
+            @Html.Label("Annex 3", new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.TextBox("file", "", new { type = "file",  id = "Attachmente9", style = "display: inline-block;" })
+                @Html.TextBox("file", "", new { @class = "txtNumeric", type = "text", id = "txtAttachmente9", style = "display: inline-block;" })
+            </div>
+            <div class="col-md-5">
+                <input type="button" onclick="UploadFile(9,'e',3,@(Model.lstAttachmentModel.Where(x=>x.AttachmentType==3).Count()>2?Model.lstAttachmentModel.Where(x=>x.AttachmentType==3).ToList()[2].ProjectAttachmentMappingId:0));" class="btn btn-info" id="eupload9" value="Upload" />
+                <input type="button" onclick="CancelFile(9);" class="btn btn-danger" id="ebtncancel9" value="Cancel" />
+            </div>
+        </div>
+
+        <div class="form-group attachmentdiv divdisplayAttachment9">
+            @Html.Label("Annex 3", new { @class = "control-label col-md-2" })
+            @if (Model.lstAttachmentModel.Where(x => x.AttachmentType == 3).Count() > 2)
+            {
+                <div class="DwnldAttachment9 col-md-5">
+                    <a style="display: inline-block;" href=@Model.lstAttachmentModel.Where(x=>x.AttachmentType==3).ToList()[2].AttachmentURL target="_blank">@Model.lstAttachmentModel.Where(x => x.AttachmentType == 3).ToList()[2].filename</a>&nbsp;
+                    <input type="button" onclick="EditFile(9);" class="btn btn-info" id="edit9" value="Edit" />
+                </div>
+            }
+            else
+            { <div class="col-md-5">
+                    @Html.TextBox("file", "", new { type = "file",  id = "Attachmenta9", style = "display: inline-block;" })
+                    @Html.TextBox("file", "", new { @class = "txtNumeric", type = "text", id = "txtAttachmenta9", style = "display: inline-block;" })
+                </div>
+                <div class="col-md-5">
+                    <input type="button" onclick="UploadFile(9,'a',3,0);" class="btn btn-info" id="aupload9" value="Upload" />
+                    @*<input type="button" onclick="CancelFile(9);" class="btn btn-danger" id="abtncancel9" value="Cancel" />*@
+                </div>}
+        </div>
+
+        <div class="form-group attachmentdiv diveditAttachment10">
+            @Html.Label("Annex 4", new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.TextBox("file", "", new { type = "file",  id = "Attachmente10", style = "display: inline-block;" })
+                @Html.TextBox("file", "", new { @class = "txtNumeric", type = "text", id = "txtAttachmente10", style = "display: inline-block;" })
+            </div>
+            <div class="col-md-5">
+                <input type="button" onclick="UploadFile(10,'e',3,@(Model.lstAttachmentModel.Where(x=>x.AttachmentType==3).Count()>3?Model.lstAttachmentModel.Where(x=>x.AttachmentType==3).ToList()[3].ProjectAttachmentMappingId:0));" class="btn btn-info" id="eupload10" value="Upload" />
+                <input type="button" onclick="CancelFile(10);" class="btn btn-danger" id="ebtncancel10" value="Cancel" />
+            </div>
+        </div>
+
+        <div class="form-group attachmentdiv divdisplayAttachment10">
+            @Html.Label("Annex 4", new { @class = "control-label col-md-2" })
+            @if (Model.lstAttachmentModel.Where(x => x.AttachmentType == 3).Count() > 3)
+            {
+                <div class="DwnldAttachment10 col-md-5">
+                    <a style="display: inline-block;" href=@Model.lstAttachmentModel.Where(x=>x.AttachmentType==3).ToList()[3].AttachmentURL target="_blank">@Model.lstAttachmentModel.Where(x => x.AttachmentType == 3).ToList()[3].filename</a>&nbsp;
+                    <input type="button" onclick="EditFile(10);" class="btn btn-info" id="edit10" value="Edit" />
+                </div>
+            }
+            else
+
+            { <div class="col-md-5">
+                    @Html.TextBox("file", "", new { type = "file",  id = "Attachmenta10", style = "display: inline-block;" })
+                    @Html.TextBox("file", "", new { @class = "txtNumeric", type = "text", id = "txtAttachmenta10", style = "display: inline-block;" })
+                </div>
+                <div class="col-md-5">
+                    <input type="button" onclick="UploadFile(10,'a',3,0);" class="btn btn-info" id="aupload10" value="Upload" />
+                    @*<input type="button" onclick="CancelFile(10);" class="btn btn-danger" id="abtncancel10" value="Cancel" />*@
+                </div>}
+        </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-10">
+                        <input type="button" class="btn btn-danger" id="btnlist" value="Go To List">
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#ProjectDate').val($('#spdateformat').html());
+
+        $(".diveditAttachment1").hide();
+        $(".diveditAttachment2").hide();
+        $(".diveditAttachment3").hide();
+        $(".diveditAttachment4").hide();
+        $(".diveditAttachment5").hide();
+        $(".diveditAttachment6").hide();
+        $(".diveditAttachment7").hide();
+        $(".diveditAttachment8").hide();
+        $(".diveditAttachment9").hide();
+        $(".diveditAttachment10").hide();
+        $(function () {
+            $('#btnSubmit').click(function (event) {
+                debugger;
+                event.preventDefault();
+                var project = {
+                    ProjectId: $('#ProjectId').val(),
+                    ProjectNumber: $('#ProjectNumber').val(),
+                    ProjectName: $('#ProjectName').val(),
+                    ProjectDate: $('#ProjectDate').val()
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/SaveProject",
+                    data: JSON.stringify(project),
+                    dataType: "json",
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        if (data != 0) {
+                            $('#hdnFlag').val(data);
+                            $('#ProjectNumber').prop('disabled', true);
+                            $('#ProjectName').prop('disabled', true);
+                            $('#ProjectDate').prop('disabled', true);
+                            // $(".attachmentdiv").show();
+                            alert("Project Saved Successfully!!")
+                        }
+                        else {
+                            alert("All Fields Are Mandatory!!");
+                        }
+                        //var url = window.location.href
+                        //url = '/home/Project';
+                        //window.location.href = url;
+                    },
+                    error: function () {
+                        alert("Error occured!!")
+                    }
+                });
+            });
+
+            $(function () {
+                $('.txtNumeric').keypress(function (e) {
+                    //debugger;
+                    //var regex = new RegExp(/^[a-z\d\_]+$/i);
+                    //var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+                    //if (regex.test(str)) {
+                    //    return true;
+                    //}
+                    //e.preventDefault();
+                    //return false;
+                    return true;
+                });
+            });
+
+
+
+            $('#btnlist').click(function (event) {
+                debugger;
+                var url = window.location.href
+                url = '/home/Project';
+                window.location.href = url;
+                //event.preventDefault();
+                //var project = {
+                //    ProjectNumber: $('#ProjectNumber').val(),
+                //    ProjectName: $('#ProjectName').val(),
+                //    ProjectDate: $('#ProjectDate').val()
+                //};
+                //$.ajax({
+                //    type: "GET",
+                //    url: "/Home/Project",
+                //    contentType: 'application/json; charset=utf-8'
+                //});
+            });
+        });
+    });
+
+    function UploadFile(attachmentnumber, type, attachmentType, projectAttachmentMappingId) {
+        debugger;
+        var data = new FormData();
+        data.append("projectid", $('#ProjectId').val());
+        data.append("attachmentType", attachmentType);
+        data.append("projectAttachmentMappingId", projectAttachmentMappingId == undefined ? 0 : projectAttachmentMappingId);
+        data.append("filename", $('#txtAttachment' + type + attachmentnumber).val());
+        $.each($('#Attachment' + type + attachmentnumber)[0].files, function (i, file) {
+            data.append('file-' + i, file);
+        });
+
+        $.ajax({
+            url: "/Home/ManageFile",
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            type: 'POST', // For jQuery < 1.9
+            success: function (data) {
+                if (data == "File Uploaded Successfully!!") {
+                    $('#Attachment' +type+ attachmentnumber).prop('disabled', true);
+                    $('#txtAttachment' + type + attachmentnumber).prop('disabled', true);
+                    $('#' + type + 'upload' + attachmentnumber).prop('disabled', true);
+                    $('#'+ type + 'btncancel' + attachmentnumber).hide();
+                }
+                alert(data);
+            }
+        });
+    }
+
+    function CancelFile(attachmentnumber) {
+        $(".divdisplayAttachment" + attachmentnumber).show();
+        $(".diveditAttachment" + attachmentnumber).hide();
+    }
+    function EditFile(attachmentnumber) {
+        $('#btncancel' + attachmentnumber).show();
+        $(".divdisplayAttachment" + attachmentnumber).hide();
+        $(".diveditAttachment" + attachmentnumber).show();
+    }
+</script>

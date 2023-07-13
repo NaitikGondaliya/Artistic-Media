@@ -1,0 +1,332 @@
+﻿@model IEnumerable<Artistic_Media_Dashboard.Models.DashboardResponse>
+<title>Sedinte</title>
+
+
+
+<style type="text/css">
+
+
+    h2 {
+        color: #0496CC;
+    }
+
+    .band2A {       
+        padding-top: 2px;
+        padding-bottom: 2px;
+        padding-left: 5px;
+        font-size: 120%;
+    }
+
+    .band3 {
+        background-color: #E7F8FC;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        padding-left: 5px;
+        font-size: 120%;
+    }
+
+        .band3 a {
+            color: #28729D;
+            text-decoration: none;
+        }
+
+            .band3 a:hover {
+                color: navy;
+                font-weight: normal;
+            }
+
+
+    .band23 {
+        background-color: #700197;
+        margin-top: 20px;
+        color: white;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        padding: 0.5em 1em 0.5em 1em;
+    }
+
+    .releasedispo {
+        background-color: white;
+        margin-top: 1px;
+        color: #60e4d8;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        padding: 0.5em 1em 0.5em 1em;
+    }
+</style>
+
+
+<style>
+
+    .accordion {
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 1px;
+        margin-bottom: 1px;
+        background-color: white;
+        color: black;
+        cursor: pointer;
+        padding: 4px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
+    }
+
+        .active, .accordion:hover {
+            background-color: #A0C2fD;
+            font-weight: bold;
+        }
+
+    .panel {
+        padding: 0 10px;
+        display: none;
+        background-color: white;
+        overflow: hidden;
+    }
+</style>
+
+<style>
+
+    .button {
+        background-color: #e35A3A;
+        border: none;
+        color: white;
+        margin: 4px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 15px;
+        border-radius: 40px;
+        box-shadow: 2px 2px 2px 2px grey;
+    }
+
+        .button:hover {
+            background: red;
+        }
+</style>
+
+
+
+<style type="text/css">
+
+    #titlu {
+        margin-bottom: 0px;
+        font-size: 5rem;
+        text-align: center;
+        height: 100px;
+        line-height: 100px;
+        color: #40C4FF;
+        background: #fff;
+        font-family: sans-serif;
+        font-weight: 700;
+        text-shadow: 5px 5px 0px #0277BD, 10px 10px 0px #FF8F00, 15px 15px 0px #0277BD;
+    }
+
+    ul.topnav {
+        list-style-type: none;
+        margin: 2px;
+        padding: 14px 10px;
+        overflow: hidden;
+        background-color: white;
+    }
+
+        ul.topnav li {
+            float: left;
+        }
+
+            ul.topnav li a.active {
+                background-color: #0496CC;
+            }
+
+            ul.topnav li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 24px 20px;
+                text-decoration: none;
+            }
+
+    .button {
+        background-color: #e35A3A;
+        border: none;
+        color: white;
+        margin: 4px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 15px;
+        border-radius: 40px;
+        box-shadow: 2px 2px 2px 2px grey;
+    }
+
+    .active, .accordion:hover {
+        background-color: #A0C2fD;
+        font-weight: bold;
+    }
+
+
+
+</style>
+
+
+
+<section class="container" id="page_content">
+    <div class="row">
+        <div class="span9">
+            <section class="row">
+                <div class="span9">
+
+                    <div id="titlu">Sedinte</div>
+
+                    <h2>Convocations and draft decisions</h2>
+
+                    <ul class="topnav">
+                        <li><a class="active button" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Convocations and draft decisions</font></font></a></li>
+                        <li><a class="button" target="_blank" href="http://www.primariagradisteavalcea.ro/minute.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Meeting minutes</font></font></a></li>
+                        <li><a class="button" target="_blank" href="http://www.primariagradisteavalcea.ro/procese-verbale-sedinte.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Meeting minutes</font></font></a></li>
+                        <li><a class="button" target="_blank" href="http://www.primariagradisteavalcea.ro/arhiva-convocari.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Archive</font></font></a></li>
+                    </ul>
+
+                    @foreach (var item in Model)
+                    {
+                <div class="band23"> @item.ProjectDate, @item.lstProject.Where(x => x.ProjectDateOnly == item.ProjectDate).FirstOrDefault().DispoDisc [Projects: @string.Join(",", @item.lstProject.Select(x => x.ProjectNumber).Distinct().ToList())]</div>
+                        <div class="releasedispo">
+                            @if (!string.IsNullOrWhiteSpace(item.lstProject.Where(x => x.ProjectDateOnly == item.ProjectDate).FirstOrDefault().DispoAttachment))
+                            {
+                            <a target="_blank" href="@item.lstProject.Where(x => x.ProjectDateOnly == item.ProjectDate).FirstOrDefault().DispoAttachment"> @item.lstProject.Where(x => x.ProjectDateOnly == item.ProjectDate).FirstOrDefault().DispoFileName  @item.ProjectDate</a>
+                            }
+                            else
+                            {
+                                <span>No Release disposition</span>
+                            }
+                        </div>
+                        foreach (var obj in item.lstProject.OrderBy(x => x.ProjectName))
+                        {
+                            <button class="accordion">[@obj.ProjectNumber] @obj.ProjectName </button>
+                            <div class="panel">
+                                <div class="band2A"> Documents:</div>
+                                @if (obj.lstAttachments != null && obj.lstAttachments.Any())
+                                {
+                                    foreach (var subitem in obj.lstAttachments)
+                                    {
+                                        <div class="band3"><a href=@subitem.strurl target="_blank">@subitem.filename</a></div>
+                                    }
+                                }
+
+                                @*<div class="band3"><a href="#" target="_blank">Link 2</a></div>
+                    <div class="band3"><a href="#" target="_blank">Link 3</a></div>*@
+
+                            </div>
+                        }
+                    }
+                    <!-- start section 1-->
+                    @*<div class="band23"> Day 2: Projects: 3,4,5</div>
+
+        <button class="accordion">[3] Books to read </button>
+        <div class="panel">
+            <div class="band2A"> Documents:</div>
+
+            <div class="band3"><a href="#" target="_blank">Link 1</a></div>
+            <div class="band3"><a href="#" target="_blank">Link 2</a></div>
+            <div class="band3"><a href="#" target="_blank">Link 3</a></div>
+
+        </div>
+
+        <button class="accordion">[4] Books to sell </button>
+        <div class="panel">
+            <div class="band2A"> Documents:</div>
+
+            <div class="band3"><a href="#" target="_blank">Link 1</a></div>
+            <div class="band3"><a href="#" target="_blank">Link 2</a></div>
+            <div class="band3"><a href="#" target="_blank">Link 3</a></div>
+
+        </div>
+
+        <button class="accordion">[5] Books to give </button>
+        <div class="panel">
+            <div class="band2A"> Documents:</div>
+
+            <div class="band3"><a href="#" target="_blank">Link 1</a></div>
+            <div class="band3"><a href="#" target="_blank">Link 2</a></div>
+            <div class="band3"><a href="#" target="_blank">Link 3</a></div>
+
+        </div>
+         end section 2
+         start section 1
+
+        <div class="band23">Day 1: Projects: 1,2</div>
+
+        <button class="accordion">[1] Important information </button>
+        <div class="panel">
+            <div class="band2A"> Documents:</div>
+
+            <div class="band3"><a href="#" target="_blank">Link 1</a></div>
+            <div class="band3"><a href="#" target="_blank">Link 2</a></div>
+            <div class="band3"><a href="#" target="_blank">Link 3</a></div>
+
+        </div>
+
+        <button class="accordion">[2] Useful information </button>
+        <div class="panel">
+            <div class="band2A"> Documents:</div>
+
+            <div class="band3"><a href="#" target="_blank">Link 1</a></div>
+            <div class="band3"><a href="#" target="_blank">Link 2</a></div>
+            <div class="band3"><a href="#" target="_blank">Link 3</a></div>
+
+        </div>*@
+                    <!-- end section 1 -->
+
+                </div>
+            </section>
+
+        </div>
+
+    </div>
+</section>
+
+<div style="height: 40px; width: 1px; "></div>
+
+
+
+@*<footer>
+        <div class="container">
+            <div class="credit">
+                <p id="template_cr_bar">Copyright © Mycompany 2023</p>
+            </div>
+        </div>
+    </footer>*@
+
+<!-- start tab script -->
+<script>
+    function openCity(cityName) {
+        var i;
+        var x = document.getElementsByClassName("city");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        document.getElementById(cityName).style.display = "block";
+    }</script>
+<!-- end tab script -->
+<!-- start accordion script -->
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            } else {
+                panel.style.display = "block";
+            }
+        });
+    }</script>
+<!-- end accordion script -->
